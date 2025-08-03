@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generator README.md</title>
+    <meta
+      name="description"
+      content="Generator README.md gratis berbasis AI untuk dokumentasi GitHub yang profesional. Dibuat oleh Xyz-Kings."
+    />
+    <meta name="author" content="Xyz-Kings" />
+    <meta property="og:title" content="Generator README.md" />
+    <meta
+      property="og:description"
+      content="Buat README profesional dengan AI dalam satu klik!"
+    />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/Xyz-Kings/github-readme-generator/refs/heads/main/logo-web.png"
+    />
+
+    <!-- Font Awesome untuk Ikon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Google Fonts: Poppins -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Marked.js untuk Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #1a1a1a;
+        color: #e0e0e0;
+        min-height: 100vh;
+        margin: 0;
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        max-width: 900px;
+        width: 100%;
+        background: #121212;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.6),
+          inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #00e6ff;
+        text-shadow: 0 0 8px rgba(0, 230, 255, 0.5);
+        text-align: center;
+        margin: 0 0 10px;
+      }
+
+      .subtitle {
+        font-size: 0.9rem;
+        color: #b0b0b0;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .input-group,
+      .output-container,
+      .message-container {
+        background: #1c1c1c;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.5);
+      }
+
+      input,
+      button {
+        border: none;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+      }
+
+      input {
+        background: #2a2a2a;
+        color: #e0e0e0;
+        box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+        width: 100%;
+      }
+
+      input:focus {
+        outline: none;
+        box-shadow: 0 0 8px #00e6ff;
+      }
+
+      button {
+        background: #00e6ff;
+        color: #121212;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 3px 10px rgba(0, 230, 255, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      button:hover {
+        background: #00b8cc;
+        transform: translateY(-2px);
+      }
+
+      .btn-icon {
+        margin-right: 6px;
+      }
+
+      .tag-pill {
+        display: inline-flex;
+        align-items: center;
+        background: #00e6ff;
+        color: #121212;
+        padding: 6px 10px;
+        border-radius: 15px;
+        margin: 4px;
+        font-size: 0.8rem;
+      }
+
+      .tag-remove-btn {
+        margin-left: 6px;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .tab {
+        background: #2a2a2a;
+        padding: 8px 15px;
+        border-radius: 8px 8px 0 0;
+        border-bottom: none;
+        cursor: pointer;
+        font-weight: 600;
+        color: #b0b0b0;
+        flex: 0 0 auto;
+        text-align: center;
+        box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+      }
+
+      .tab.active {
+        background: #1c1c1c;
+        color: #00e6ff;
+        box-shadow: none;
+      }
+
+      #readmeOutput {
+        min-height: 300px;
+        background: #1c1c1c;
+        border-radius: 0 0 8px 8px;
+        padding: 10px;
+        color: #e0e0e0;
+        font-family: "Courier New", monospace;
+        box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+      }
+
+      #readmeOutput.markdown-body {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .lds-dual-ring:after {
+        border: 3px solid #00e6ff;
+        border-color: #00e6ff transparent #00e6ff transparent;
+      }
+
+      .flex-group {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .advanced-settings {
+        background: #1c1c1c;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.5);
+      }
+
+      .output-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #1c1c1c;
+        border-radius: 8px 8px 0 0;
+        padding: 0 10px;
+      }
+
+      .tab-group {
+        display: flex;
+        gap: 5px;
+      }
+
+      #copyBtn {
+        display: none;
+      }
+
+      #copyBtn.visible {
+        display: flex;
+      }
+
+      .toast {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        max-width: 350px;
+        width: 90%;
+        background: #121212;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.6),
+          0 3px 10px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        animation: slideIn 0.5s ease-in-out;
+        display: none;
+      }
+
+      .toast.show {
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .toast h2 {
+        font-size: 1.2rem;
+        color: #00e6ff;
+        text-shadow: 0 0 5px rgba(0, 230, 255, 0.5);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .toast p {
+        font-size: 0.8rem;
+        color: #b0b0b0;
+        margin-bottom: 10px;
+      }
+
+      .toast .btn-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .toast .close-btn {
+        background: #ff4d4d;
+        box-shadow: 0 3px 10px rgba(255, 77, 77, 0.4);
+      }
+
+      .toast .close-btn:hover {
+        background: #cc3f3f;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        input,
+        button {
+          font-size: 0.85rem;
+          padding: 8px;
+        }
+
+        .flex-group {
+          flex-direction: column;
+        }
+
+        .tab {
+          font-size: 0.85rem;
+          padding: 6px 10px;
+        }
+
+        #readmeOutput {
+          min-height: 250px;
+        }
+
+        .toast {
+          max-width: 95%;
+          right: 10px;
+          top: 10px;
+        }
+
+        .toast .btn-group {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        .subtitle {
+          font-size: 0.8rem;
+        }
+
+        input,
+        button {
+          font-size: 0.8rem;
+        }
+
+        .tag-pill {
+          font-size: 0.7rem;
+          padding: 5px 8px;
+        }
+
+        .toast h2 {
+          font-size: 1rem;
+        }
+
+        .toast p {
+          font-size: 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1><i class="fas fa-file-code btn-icon"></i> Generator README.md</h1>
+      <p class="subtitle">
+        Buat README profesional dengan AI! <i class="fas fa-rocket"></i>
+      </p>
+
+      <div class="input-group">
+        <div class="flex-group">
+          <input
+            type="text"
+            id="githubUrl"
+            placeholder="Masukkan URL Repositori GitHub..."
+            class="flex-grow"
+          />
+          <button id="generateBtn">
+            <i class="fas fa-cogs btn-icon"></i>
+            <span id="btn-text">Generate</span>
+            <div id="loader" class="lds-dual-ring hidden ml-2"></div>
+          </button>
+        </div>
+        <label class="block text-sm font-medium mb-1"
+          ><i class="fas fa-image btn-icon"></i> Link Gambar/GIF</label
+        >
+        <div id="image-inputs-container" class="space-y-2"></div>
+        <button id="add-image-btn">
+          <i class="fas fa-plus btn-icon"></i> Tambah Gambar
+        </button>
+        <label for="tags-input" class="block text-sm font-medium mb-1"
+          ><i class="fas fa-tags btn-icon"></i> Tag Konteks (Tekan Enter)</label
+        >
+        <div id="tags-container" class="mb-2 flex flex-wrap gap-2"></div>
+        <input
+          type="text"
+          id="tags-input"
+          placeholder="contoh: react, nodejs, ai..."
+        />
+        <details class="group mt-3">
+          <summary class="cursor-pointer text-sm font-medium flex items-center">
+            <i class="fas fa-cog btn-icon"></i> Pengaturan Lanjutan
+          </summary>
+          <div class="advanced-settings mt-3">
+            <label for="githubToken" class="block text-sm font-medium mb-1"
+              ><i class="fab fa-github btn-icon"></i> GitHub Token</label
+            >
+            <div class="flex-group">
+              <input
+                type="password"
+                id="githubToken"
+                placeholder="Masukkan GitHub Token..."
+                class="flex-grow"
+              />
+              <button id="save-github-token-btn">
+                <i class="fas fa-save btn-icon"></i> Simpan
+              </button>
+            </div>
+            <label for="geminiToken" class="block text-sm font-medium mb-1 mt-3"
+              ><i class="fas fa-key btn-icon"></i> Gemini API Key</label
+            >
+            <div class="flex-group">
+              <input
+                type="password"
+                id="geminiToken"
+                placeholder="Masukkan Gemini API Key..."
+                class="flex-grow"
+              />
+              <button id="save-gemini-token-btn">
+                <i class="fas fa-save btn-icon"></i> Simpan
+              </button>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <div id="message-container" class="message-container"></div>
+
+      <div id="output-container" class="output-container">
+        <div class="output-header">
+          <div class="tab-group">
+            <button id="tab-code" class="tab active">
+              <i class="fas fa-code btn-icon"></i> View Code
+            </button>
+            <button id="tab-preview" class="tab">
+              <i class="fas fa-eye btn-icon"></i> Preview
+            </button>
+          </div>
+          <button id="copyBtn" class="visible">
+            <i class="fas fa-copy btn-icon"></i> Salin
+          </button>
+        </div>
+        <div id="readmeOutput" contenteditable="true"></div>
+      </div>
+
+      <div class="text-center text-sm">
+        Dibuat oleh
+        <a
+          href="https://github.com/Xyz-Kings"
+          target="_blank"
+          class="text-cyan-400 hover:underline"
+          >@Xyz-Kings</a
+        >
+      </div>
+    </div>
+
+    <div id="api-keys-toast" class="toast">
+      <h2><i class="fas fa-lock btn-icon"></i> Pengaturan API Keys</h2>
+      <p>Key disimpan lokal di browser (<code>localStorage</code>).</p>
+      <div>
+        <label for="toast-github-token" class="block text-sm font-medium mb-1"
+          ><i class="fab fa-github btn-icon"></i> GitHub Token</label
+        >
+        <input
+          type="password"
+          id="toast-github-token"
+          placeholder="github_pat_..."
+        />
+        <p class="text-xs text-gray-500">
+          Untuk data repo.
+          <a
+            href="https://github.com/settings/tokens?type=beta"
+            target="_blank"
+            class="text-cyan-500 hover:underline"
+            >Buat token</a
+          >.
+        </p>
+      </div>
+      <div>
+        <label for="toast-gemini-token" class="block text-sm font-medium mb-1"
+          ><i class="fas fa-key btn-icon"></i> Gemini API Key</label
+        >
+        <input
+          type="password"
+          id="toast-gemini-token"
+          placeholder="AIza..."
+        />
+        <p class="text-xs text-gray-500">
+          Untuk generate konten.
+          <a
+            href="https://aistudio.google.com/app/apikey"
+            target="_blank"
+            class="text-cyan-500 hover:underline"
+            >Dapatkan key</a
+          >.
+        </p>
+      </div>
+      <div class="btn-group">
+        <button id="toast-save-keys-btn">
+          <i class="fas fa-save btn-icon"></i> Simpan
+        </button>
+        <button id="toast-close-btn" class="close-btn">
+          <i class="fas fa-times btn-icon"></i> Tutup
+        </button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const githubUrlInput = document.getElementById("githubUrl");
+        const generateBtn = document.getElementById("generateBtn");
+        const copyBtn = document.getElementById("copyBtn");
+        const loader = document.getElementById("loader");
+        const btnText = document.getElementById("btn-text");
+        const githubTokenInput = document.getElementById("githubToken");
+        const saveGithubTokenBtn = document.getElementById("save-github-token-btn");
+        const geminiTokenInput = document.getElementById("geminiToken");
+        const saveGeminiTokenBtn = document.getElementById("save-gemini-token-btn");
+        const imageInputsContainer = document.getElementById("image-inputs-container");
+        const addImageBtn = document.getElementById("add-image-btn");
+        const tagsInput = document.getElementById("tags-input");
+        const tagsContainer = document.getElementById("tags-container");
+        const messageContainer = document.getElementById("message-container");
+        const readmeOutput = document.getElementById("readmeOutput");
+        const codeTab = document.getElementById("tab-code");
+        const previewTab = document.getElementById("tab-preview");
+        const apiKeysToast = document.getElementById("api-keys-toast");
+        const toastGithubTokenInput = document.getElementById("toast-github-token");
+        const toastGeminiTokenInput = document.getElementById("toast-gemini-token");
+        const toastSaveKeysBtn = document.getElementById("toast-save-keys-btn");
+        const toastCloseBtn = document.getElementById("toast-close-btn");
+
+        let tags = new Set();
+        let currentMarkdown = "";
+        githubTokenInput.value = localStorage.getItem("githubApiToken") || "";
+        geminiTokenInput.value = localStorage.getItem("geminiApiKey") || "";
+        addNewImageInput(true);
+
+        if (
+          !localStorage.getItem("githubApiToken")?.trim() ||
+          !localStorage.getItem("geminiApiKey")?.trim()
+        ) {
+          apiKeysToast.classList.add("show");
+          setTimeout(() => {
+            if (apiKeysToast.classList.contains("show")) {
+              apiKeysToast.classList.remove("show");
+            }
+          }, 8000);
+        }
+
+        generateBtn.addEventListener("click", handleGenerateReadme);
+        copyBtn.addEventListener("click", copyToClipboard);
+        saveGithubTokenBtn.addEventListener("click", () =>
+          saveToken("githubApiToken", githubTokenInput.value, "GitHub")
+        );
+        saveGeminiTokenBtn.addEventListener("click", () =>
+          saveToken("geminiApiKey", geminiTokenInput.value, "Gemini")
+        );
+        addImageBtn.addEventListener("click", () => addNewImageInput(false));
+        tagsInput.addEventListener("keydown", handleTagInput);
+        tagsContainer.addEventListener("click", handleTagRemove);
+        codeTab.addEventListener("click", () => switchTab("code"));
+        previewTab.addEventListener("click", () => switchTab("preview"));
+        toastSaveKeysBtn.addEventListener("click", () => {
+          saveToken("githubApiToken", toastGithubTokenInput.value, "GitHub");
+          saveToken("geminiApiKey", toastGeminiTokenInput.value, "Gemini");
+          githubTokenInput.value = toastGithubTokenInput.value;
+          geminiTokenInput.value = toastGeminiTokenInput.value;
+          apiKeysToast.classList.remove("show");
+        });
+        toastCloseBtn.addEventListener("click", () => {
+          apiKeysToast.classList.remove("show");
+        });
+
+        function saveToken(key, value, name) {
+          if (value) {
+            localStorage.setItem(key, value);
+            showMessage("success", `Token ${name} disimpan.`);
+          } else {
+            localStorage.removeItem(key);
+            showMessage("info", `Token ${name} dihapus.`);
+          }
+        }
+
+        function addNewImageInput(isFirst = false) {
+          const div = document.createElement("div");
+          div.className = "flex-group";
+          div.innerHTML = `<input type="text" class="image-url-input flex-grow" placeholder="https://.../image.png"> ${
+            !isFirst
+              ? '<button class="remove-image-btn text-red-400 hover:text-red-300 font-bold text-lg">&times;</button>'
+              : ""
+          }`;
+          imageInputsContainer.appendChild(div);
+          if (!isFirst) {
+            div
+              .querySelector(".remove-image-btn")
+              .addEventListener("click", () => div.remove());
+          }
+        }
+
+        function handleTagInput(e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            const tagText = tagsInput.value.trim().toLowerCase();
+            if (tagText && !tags.has(tagText)) {
+              tags.add(tagText);
+              const tagPill = document.createElement("div");
+              tagPill.className = "tag-pill";
+              tagPill.innerHTML = `<span>${tagText}</span><span class="tag-remove-btn" data-tag="${tagText}">&times;</span>`;
+              tagsContainer.appendChild(tagPill);
+            }
+            tagsInput.value = "";
+          }
+        }
+
+        function handleTagRemove(e) {
+          if (e.target.classList.contains("tag-remove-btn")) {
+            e.target.parentElement.remove();
+            tags.delete(e.target.dataset.tag);
+          }
+        }
+
+        function renderCode() {
+          readmeOutput.innerHTML =
+            '<div style="white-space: pre-wrap;">' +
+            currentMarkdown
+              .replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;")
+              .replace(/\n/g, "<br>") +
+            "</div>";
+          readmeOutput.classList.remove("markdown-body");
+          readmeOutput.setAttribute("contenteditable", "true");
+        }
+
+        function renderPreview() {
+          let markdownText = currentMarkdown.trim();
+          if (
+            markdownText.startsWith("```markdown") &&
+            markdownText.endsWith("```")
+          ) {
+            markdownText = markdownText
+              .replace(/^```markdown/, "")
+              .replace(/```$/, "")
+              .trim();
+          }
+          readmeOutput.innerHTML = `<div class="markdown-body">${marked.parse(
+            markdownText
+          )}</div>`;
+          readmeOutput.classList.add("markdown-body");
+          readmeOutput.setAttribute("contenteditable", "false");
+        }
+
+        function switchTab(tabName) {
+          const isCode = tabName === "code";
+          codeTab.classList.toggle("active", isCode);
+          previewTab.classList.toggle("active", !isCode);
+          copyBtn.classList.toggle("visible", isCode);
+          if (isCode) {
+            renderCode();
+          } else {
+            renderPreview();
+          }
+        }
+
+        function setLoading(isLoading) {
+          generateBtn.disabled = isLoading;
+          btnText.textContent = isLoading ? "Memproses..." : "Generate";
+          loader.classList.toggle("hidden", !isLoading);
+          if (isLoading) {
+            currentMarkdown = "Menghasilkan README.md...";
+            renderCode();
+          }
+        }
+
+        function showMessage(type, message) {
+          messageContainer.innerHTML = "";
+          const colors = {
+            error: "bg-red-900 text-red-300",
+            success: "bg-green-900 text-green-300",
+            info: "bg-blue-900 text-blue-300",
+          };
+          const div = document.createElement("div");
+          div.className = `p-3 rounded-lg ${colors[type] || colors.info}`;
+          div.innerHTML = `<i class="fas fa-${
+            type === "success"
+              ? "check-circle"
+              : type === "error"
+              ? "exclamation-circle"
+              : "info-circle"
+          } btn-icon"></i> ${message}`;
+          messageContainer.appendChild(div);
+          setTimeout(() => {
+            div.style.transition = "opacity 0.5s";
+            div.style.opacity = "0";
+            setTimeout(() => div.remove(), 500);
+          }, 3000);
+        }
+
+        async function handleGenerateReadme() {
+          messageContainer.innerHTML = "";
+          const userGeminiKey = localStorage.getItem("geminiApiKey");
+          const userGithubKey = localStorage.getItem("githubApiToken");
+
+          if (!userGithubKey) {
+            showMessage(
+              "error",
+              `GitHub Token diperlukan. Tambahkan di Pengaturan Lanjutan atau Toast.`
+            );
+            return;
+          }
+
+          if (!userGeminiKey) {
+            const lastGenTimestamp = localStorage.getItem(
+              "lastGenerationTimestamp"
+            );
+            if (lastGenTimestamp) {
+              const timeDiff = new Date().getTime() - Number(lastGenTimestamp);
+              const hoursPassed = timeDiff / (1000 * 60 * 60);
+              if (hoursPassed < 24) {
+                showMessage(
+                  "error",
+                  `Batas 1x generate per hari. Sisa: ${(24 - hoursPassed).toFixed(
+                    1
+                  )} jam. Tambahkan Gemini API Key.`
+                );
+                return;
+              }
+            }
+          }
+
+          const url = githubUrlInput.value.trim();
+          if (!url) return showMessage("error", "URL GitHub wajib diisi.");
+
+          const repoPath = parseGithubUrl(url);
+          if (!repoPath) return showMessage("error", "Format URL GitHub salah.");
+
+          setLoading(true);
+          switchTab("code");
+
+          try {
+            const [repoDetails, repoTree] = await Promise.all([
+              fetchGithubApi(`https://api.github.com/repos/${repoPath}`),
+              fetchGithubApi(
+                `https://api.github.com/repos/${repoPath}/git/trees/main?recursive=1`
+              ),
+            ]);
+            const imageUrls = Array.from(
+              document.querySelectorAll(".image-url-input")
+            )
+              .map((input) => input.value.trim())
+              .filter(Boolean);
+            const prompt = createPrompt(
+              repoDetails,
+              repoTree.tree.map((f) => f.path),
+              imageUrls,
+              Array.from(tags)
+            );
+            const generatedReadme = await callGeminiApi(prompt, userGeminiKey);
+
+            currentMarkdown = stripMarkdownWrapper(generatedReadme);
+            renderCode();
+            showMessage("success", "README.md berhasil dibuat!");
+            if (!userGeminiKey) {
+              localStorage.setItem(
+                "lastGenerationTimestamp",
+                new Date().getTime().toString()
+              );
+            }
+          } catch (error) {
+            showMessage("error", error.message || "Terjadi kesalahan.");
+            currentMarkdown = `# Gagal Membuat README\n\n**Error:** ${error.message}`;
+            renderCode();
+          } finally {
+            setLoading(false);
+          }
+        }
+
+        function stripMarkdownWrapper(text) {
+          return text
+            .replace(/^```markdown/, "")
+            .replace(/```$/, "")
+            .trim();
+        }
+
+        function parseGithubUrl(url) {
+          const match = url.match(/github\.com\/([^\/]+\/[^\/]+)(\/|$)/);
+          return match ? match[1].replace(".git", "") : null;
+        }
+
+        async function fetchGithubApi(apiUrl) {
+          const token = localStorage.getItem("githubApiToken");
+          const headers = { Accept: "application/vnd.github.v3+json" };
+          if (token) headers["Authorization"] = `Bearer ${token}`;
+          const response = await fetch(apiUrl, { headers });
+          if (!response.ok) {
+            if (response.status === 401) throw new Error("Token GitHub salah.");
+            if (response.status === 404)
+              throw new Error("Repositori tidak ditemukan.");
+            if (response.status === 403)
+              throw new Error("Batas API GitHub tercapai.");
+            throw new Error(`Error GitHub API (${response.status})`);
+          }
+          return response.json();
+        }
+
+        function createPrompt(repoDetails, files, imageUrls, tags) {
+          let imageInstruction = "";
+          if (imageUrls.length > 0) {
+            let imageMarkdown =
+              imageUrls.length === 1
+                ? `\n<p align="center"><img src="${
+                    imageUrls[0]
+                  }" alt="Preview" width="80%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);"><br><em>Screenshot utama proyek</em></p>\n`
+                : `\n## Galeri Proyek 📸\n<p align="center" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">${imageUrls
+                    .map(
+                      (url, index) =>
+                        `<img src="${url}" alt="Preview ${
+                          index + 1
+                        }" width="45%" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);"><br><em>Gambar ${
+                          index + 1
+                        }</em>`
+                    )
+                    .join("\n")}</p>\n`;
+            imageInstruction = `4. **Galeri Proyek**:\n${imageMarkdown}`;
+          }
+
+          let tagInstruction = tags.length
+            ? `\n**Konteks Tambahan:** Gunakan tag berikut untuk membentuk narasi yang relevan: ${tags.join(
+                ", "
+              )}.\n`
+            : "";
+          const structureNumbers = {
+            features: 4,
+            tech: 5,
+            quickstart: 6,
+            contribute: 7,
+            support: 8,
+            license: 9,
+          };
+          if (imageUrls.length > 0)
+            Object.keys(structureNumbers).forEach(
+              (key) => structureNumbers[key]++
+            );
+
+          return `Buat README.md profesional dan menarik untuk repositori GitHub dengan gaya modern, visual, dan engaging. Gunakan bahasa yang hidup, kreatif, dan mengundang, dengan emoji untuk visual appeal. Berikut detailnya:  
+- Nama: ${repoDetails.name}  
+- Deskripsi: ${repoDetails.description || "Tidak ada deskripsi."}  
+- Bahasa Utama: ${repoDetails.language || "Tidak diketahui"}  
+- Files: ${files.slice(0, 20).join(", ")}  
+${tagInstruction}  
+
+**Struktur dan Instruksi Khusus**:  
+1. **Judul Utama** 🎉:  
+   - Gunakan H1 dengan nama proyek, tambahkan emoji besar yang relevan (contoh: 🤖 untuk bot, 🚀 untuk aplikasi, 🎮 untuk game).  
+   - Tambahkan slogan pendek di bawahnya (contoh: "Bot serba bisa untuk petualangan digitalmu!").  
+
+2. **Badges** 🏅:  
+   - Tambahkan badge Shields.io untuk:  
+     - Bahasa utama (contoh: JavaScript, Python, warna kuning).  
+     - Platform/framework utama (contoh: Node.js, React, warna hijau).  
+     - Status proyek (contoh: "Actively Maintained" atau "Work in Progress", warna biru).  
+     - Versi (jika relevan, contoh: "v1.0.0", warna ungu).  
+   - Pastikan badge berwarna cerah dan serasi, dengan link ke situs resmi teknologi jika memungkinkan.  
+
+3. **Deskripsi** 📖:  
+   - Tulis 2-3 paragraf dengan gaya storytelling yang menarik.  
+   - Paragraf 1: Hook yang bikin penasaran (contoh: "Pernah ingin bot yang ngobrol sama YouTube?").  
+   - Paragraf 2: Jelaskan tujuan proyek, manfaat, dan keunikan, dengan nada antusias.  
+   - Paragraf 3: Call-to-Action kuat (contoh: "Clone sekarang dan wujudkan ide gila itu!").  
+   - Gunakan emoji di awal setiap paragraf (contoh: 🚀, 🌟, 🔥).  
+
+${imageInstruction}  
+
+${structureNumbers.features}. **Fitur Utama** ✨:  
+   - Tulis 4-6 fitur utama dalam bentuk poin.  
+   - Setiap poin diawali emoji unik yang relevan (contoh: 🔍 untuk pencarian, ⚙️ untuk konfigurasi, 🧩 untuk modularitas).  
+   - Buat deskripsi singkat, jelas, dan menarik untuk setiap fitur.  
+
+${structureNumbers.tech}. **Tech Stack** 🛠️:  
+   - Daftar teknologi utama dalam poin (contoh: JavaScript, Node.js, npm).  
+   - Tambahkan emoji teknologi (contoh: 📜 untuk JS, 🟢 untuk Node.js, 📦 untuk npm).  
+   - Jika relevan, sebutkan library/framework spesifik dari files atau tags.  
+
+${structureNumbers.quickstart}. **Quick Start** 🚀:  
+   - Tulis langkah instalasi yang ringkas dan user-friendly dalam format bernomor.  
+   - Sertakan perintah:  
+     - Clone: \`git clone ${repoDetails.html_url}\`  
+     - Masuk direktori: \`cd ${repoDetails.name}\`  
+     - Install: Contoh berdasarkan bahasa (misalnya, \`npm install\` untuk JS).  
+     - Jalankan: Contoh berdasarkan bahasa (misalnya, \`npm start\`).  
+   - Tambahkan emoji di setiap langkah (contoh: 📥 untuk clone, ▶️ untuk jalankan).  
+
+${structureNumbers.contribute}. **Kontribusi** 🤝:  
+   - Tulis panduan kontribusi dengan nada mengundang dan antusias.  
+   - Sertakan langkah: Fork, buat branch, commit, buat Pull Request.  
+   - Tambahkan CTA seperti "Ayo bergabung dan buat proyek ini lebih epik!"  
+   - Gunakan emoji untuk setiap langkah (contoh: 🍴, 🌱, 💾, 🚀).  
+
+${structureNumbers.support}. **Dukungan & Komunitas** 💬:  
+   - Tambahkan bagian untuk kontak/support (contoh: "Ajukan pertanyaan di Issues!" atau "Gabung diskusi di Discord").  
+   - Jika ada tags seperti 'discord' atau 'community', sertakan link komunitas (contoh: [Discord](https://discord.gg/xyzkings)).  
+   - Gunakan emoji seperti 💌 atau 🌐.  
+   - Tambahkan badge Shields.io untuk lisensi jika ada (contoh: MIT, Apache, warna biru).  
+
+**Catatan Tambahan**:  
+- Gunakan Markdown mentah tanpa wrapper \`\`\`markdown.  
+- Pastikan tata letak rapi dengan spasi antar section (2 baris kosong).  
+- Gunakan nada yang antusias, profesional, tapi santai untuk menarik perhatian.  
+- Prioritaskan konteks dari tags untuk menyesuaikan narasi (misalnya, 'bot' berarti fokus ke otomasi, 'web' ke antarmuka pengguna).  
+- Tambahkan footer kecil: "---\nDibuat dengan README GENERATOR By [Xyz-Kings](https://github.com/Xyz-Kings)".`;
+        }
+
+        async function callGeminiApi(prompt, apiKey) {
+          if (!apiKey) {
+            throw new Error("Gemini API Key diperlukan.");
+          }
+          const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
+            }
+          );
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(
+              `Error Gemini API: ${errorData.error?.message || response.statusText}`
+            );
+          }
+          const data = await response.json();
+          return (
+            data.candidates?.[0]?.content?.parts?.[0]?.text ||
+            "Gagal mengekstrak konten dari AI."
+          );
+        }
+
+        function copyToClipboard() {
+          let rawText = currentMarkdown;
+          if (rawText.startsWith("```markdown") && rawText.endsWith("```")) {
+            rawText = rawText
+              .replace(/^```markdown/, "")
+              .replace(/```$/, "")
+              .trim();
+          }
+          navigator.clipboard
+            .writeText(rawText)
+            .then(() => showMessage("success", "Teks disalin."))
+            .catch(() => showMessage("error", "Gagal menyalin teks."));
+        }
+      });
+    </script>
+  </body>
+      </html>
